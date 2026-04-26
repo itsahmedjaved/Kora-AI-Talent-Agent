@@ -1,5 +1,3 @@
-import pdfParse from 'pdf-parse'
-
 export async function POST(req) {
   try {
     const formData = await req.formData()
@@ -10,6 +8,8 @@ export async function POST(req) {
     }
 
     const buffer = Buffer.from(await file.arrayBuffer())
+
+    const pdfParse = (await import('pdf-parse/lib/pdf-parse.js')).default
     const parsed = await pdfParse(buffer)
 
     return Response.json({
